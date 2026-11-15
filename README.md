@@ -2,7 +2,8 @@
 
 A macOS Big Sur–style Control Center for the XFCE desktop, written in Python and GTK 3.
 
-<!-- Screenshots: add images under screenshots/ and link them here. -->
+<p align="center"><img src="screenshots/overview.gif" alt="Opening Control Center, then the Sound, Bluetooth, AirDrop and Keyboard Brightness menus" width="390"></p>
+<p align="center"><sub>Shown with the Turkish interface; it follows the system language.</sub></p>
 
 It started as a fork of [comice-control-center](https://github.com/libredeb/comice-control-center)
 by Juan Lozano and has since been largely rewritten and extended.
@@ -24,6 +25,38 @@ by Juan Lozano and has since been largely rewritten and extended.
 
 Tested on Xubuntu 24.04 (XFCE, X11) on a MacBook Air (2012) with the WhiteSur GTK and
 icon themes. Other hardware should work; tiles for hardware that isn't present are hidden.
+
+## A closer look
+
+### Display
+
+Click **Display** for Dark Mode (or your own theme script), Night Shift and Presentation Mode.
+The brightness slider is on the main view.
+
+<p align="center"><img src="screenshots/display.gif" alt="Turning Night Shift off and on, then dragging the brightness slider" width="390"></p>
+<p align="center"><sub>Shown with the Turkish interface. Screen recorders capture the picture before the backlight
+and colour temperature are applied, so brightness and Night Shift are recreated in this GIF.</sub></p>
+
+### Now Playing
+
+Click the Now Playing card to see every open player: music apps, internet radio, browser tabs.
+Each card has its own controls and a badge for the app that's playing; click the progress bar
+to seek.
+
+<p align="center"><img src="screenshots/now-playing.gif" alt="Switching between Lollypop, Shortwave and a YouTube tab, seeking and pausing" width="390"></p>
+
+### Battery, Music Recognition and quick buttons
+
+Turn these on in the Settings window and they appear at the bottom of Control Center:
+
+- **Battery** percentage; click it for the battery menu (Low Power Mode, apps using
+  significant energy)
+- **Music Recognition** identifies the song that's playing with SongRec and offers to open it
+  in Shazam or search it in YouTube Music; the last result stays on the button
+- **Settings**, **Screenshot**, **Lock** and **Power** buttons. If Screenshot, Lock or Power
+  is on as well, Music Recognition moves to a second row.
+
+<p align="center"><img src="screenshots/bottom-bar.gif" alt="Turning on Battery, Music Recognition and the quick buttons in Settings, then using them in Control Center" width="800"></p>
 
 ## Requirements
 
@@ -53,13 +86,18 @@ Command-line tools, by feature:
 
 ## Installation
 
+Clone it anywhere; it finds its files relative to its own folder. For example:
+
 ```bash
-git clone https://github.com/memecikoliveoil/cupertino-control-center.git ~/.config/cupertino-control-center
-python3 ~/.config/cupertino-control-center/main.py
+git clone https://github.com/memecikoliveoil/cupertino-control-center.git ~/.local/share/cupertino-control-center
+python3 ~/.local/share/cupertino-control-center/main.py
 ```
 
 To open it from the panel, add a Launcher item that runs the command above. Clicking the
 launcher again closes it, as do Esc and clicking outside the window.
+
+Your settings and history are kept inside the folder, in
+`cupertinocontrolcenter/functions/states/` (not tracked by git), so `git pull` keeps them.
 
 ### Low Power Mode helper (optional)
 
@@ -122,6 +160,23 @@ the comment above `THEME_SCRIPT` describes what the script receives and reports.
 
 Settings that can be changed without editing code are in the Settings window
 (`python3 cupertinocontrolcenter/settings_gui.py`).
+
+To list the Settings window in the XFCE Settings Manager, save this as
+`~/.local/share/applications/cupertino-control-center-settings.desktop`, with your own path:
+
+```ini
+[Desktop Entry]
+Type=Application
+Name=Control Center Settings
+Name[tr]=Denetim Merkezi Ayarları
+Exec=python3 /path/to/cupertino-control-center/cupertinocontrolcenter/settings_gui.py
+Icon=/path/to/cupertino-control-center/icons/ccc-xfce4-settings.svg
+Categories=XFCE;GTK;Settings;DesktopSettings;X-XFCE-SettingsDialog;X-XFCE-PersonalSettings;
+OnlyShowIn=XFCE;
+X-XfcePluggable=true
+```
+
+`X-XfcePluggable=true` opens it inside the Settings Manager window, as in the GIF above.
 
 ## Translations
 
