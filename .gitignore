@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+
+# Per-user state: settings, music history, saved hotspots (contains network names)
+cupertinocontrolcenter/functions/states/
+
+# Local icon drafts
+icons/icon_backup/
+
+*.tmp

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>Cupertino Control Center</vendor>
+  <action id="com.github.memecikoliveoil.cupertino-cpu-policy">
+    <description>Turn Low Power Mode on or off</description>
+    <description xml:lang="tr">Düşük Güç Modunu aç/kapat</description>
+    <message>Authentication is required to change Low Power Mode</message>
+    <message xml:lang="tr">Düşük Güç Modunu değiştirmek için kimlik doğrulama gerekiyor</message>
+    <defaults>
+      <!-- The user at the computer (active local session): no password -->
+      <allow_active>yes</allow_active>
+      <!-- Remote, background or locked sessions: administrator password -->
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_any>auth_admin</allow_any>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/libexec/cupertino-cpu-policy</annotate>
+  </action>
+</policyconfig>

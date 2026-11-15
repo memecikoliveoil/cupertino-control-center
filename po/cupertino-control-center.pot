@@ -1,0 +1,536 @@
+# Translations template for Cupertino Control Center.
+# Copyright (C) 2026 Cupertino Control Center contributors
+# This file is distributed under the same license as the Cupertino Control
+# Center project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Cupertino Control Center VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-11-15 20:20+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Task Manager"
+msgstr ""
+
+#. Translators: "Music Recognition" split over two lines
+#: cupertinocontrolcenter/functions/battery_box.py
+#: cupertinocontrolcenter/functions/music_recognition.py
+#: cupertinocontrolcenter/widgets/media_box.py
+msgid "Music"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+#, python-format
+msgid "%d h %d min"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+#, python-format
+msgid "%d h"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+#, python-format
+msgid "%d min"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Power Modes"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Low Power Mode"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Airplane Mode"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Battery Settings…"
+msgstr ""
+
+#. Translators: battery percentage while unknown; use your language's percent
+#. style
+#: cupertinocontrolcenter/functions/battery_box.py
+#: cupertinocontrolcenter/widgets/optional_bar.py
+msgid "--%"
+msgstr ""
+
+#. Translators: battery percentage; use your language's percent style (e.g.
+#. "%%%d")
+#: cupertinocontrolcenter/functions/battery_box.py
+#: cupertinocontrolcenter/functions/sound_view.py
+#: cupertinocontrolcenter/widgets/optional_bar.py
+#, python-format
+msgid "%d%%"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Power Source: Battery"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Power Source: Power Adapter"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+#, python-format
+msgid "%s remaining"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Calculating time remaining…"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Battery Is Charged"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+#, python-format
+msgid "%s until full"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Charging"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Not Charging"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "Using Significant Energy"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+msgid "No Apps Using Significant Energy"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/bluetooth_information.py
+msgid "Unknown Device"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+#: cupertinocontrolcenter/widgets/display_level.py
+msgid "Display"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+msgid "Theme"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+msgid "Dark Mode"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+msgid "Night Shift"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+msgid "Presentation Mode"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+#: cupertinocontrolcenter/functions/sm_view.py
+msgid "Display Settings…"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+msgid "Automatic"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+msgid "Sunrise"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+msgid "Day"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+msgid "Sunset"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+msgid "Night"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+#: cupertinocontrolcenter/functions/network_information.py
+#: cupertinocontrolcenter/widgets/connection_box.py
+msgid "Off"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/display_view.py
+#: cupertinocontrolcenter/widgets/connection_box.py
+msgid "On"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/media_view.py
+#: cupertinocontrolcenter/widgets/media_box.py
+msgid "Shortwave Radio"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/media_view.py
+#: cupertinocontrolcenter/widgets/media_box.py
+msgid "Stopped Radio Stream"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "Now"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+#, python-format
+msgid "%d min ago"
+msgid_plural "%d min ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+#, python-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: date format for older entries (strftime)
+#: cupertinocontrolcenter/functions/music_recognition.py
+#, python-format
+msgid "%m/%d/%Y"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "Open in Shazam"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "Search in YouTube Music"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "SongRec not found"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "SongRec is not installed."
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "No Match Found"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "No match was found for this song."
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "Listening"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "No Match"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "Error"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "Recognition"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "Start Listening"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "Listening…"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+msgid "No songs recognized yet"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/network_information.py
+msgid "Not Connected"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/sm_view.py
+msgid "Screen Mirroring"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/sm_view.py
+#: cupertinocontrolcenter/functions/sound_view.py
+#, python-format
+msgid "External Display (%s)"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/sound_view.py
+#: cupertinocontrolcenter/widgets/sound_box.py
+msgid "Sound"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/sound_view.py
+msgid "Sound Settings…"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/sound_view.py
+msgid "Output"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/sound_view.py
+msgid "Input"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/sound_view.py
+msgid "Internal Audio"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/sound_view.py
+msgid "Headphones"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/sound_view.py
+msgid "Headphone Microphone"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Control Center Settings"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "_Close"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/battery_box.py
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Battery"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Show in Control Center"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Battery percentage; click for the battery menu"
+msgstr ""
+
+#: cupertinocontrolcenter/functions/music_recognition.py
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Music Recognition"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Circle: identifies the playing song · Text: history"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Quick Buttons"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Settings"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Settings Manager"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Screenshot"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Lock"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Lock the screen"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Power"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Log out, restart, shut down"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Language"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid ""
+"When Battery and Music Recognition are both on, they sit side by side. If"
+" Screenshot, Lock or Power is also on, there is no room left, so Music "
+"Recognition moves to a second row and the Control Center gets taller. "
+"Buttons next to a hidden one fill its place. Changes appear the next time"
+" the Control Center opens."
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "_General"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "System default"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Applies the next time it opens"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Recognition history"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Clear History…"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+#, python-format
+msgid "%d song saved"
+msgid_plural "%d songs saved"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "History is empty"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Clear the Music Recognition history?"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+#, python-format
+msgid "%d recognized song and its cover will be deleted. This can't be undone."
+msgid_plural ""
+"%d recognized songs and their covers will be deleted. This can't be "
+"undone."
+msgstr[0] ""
+msgstr[1] ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Cancel"
+msgstr ""
+
+#: cupertinocontrolcenter/settings_gui.py
+msgid "Delete"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/bluetooth_manager.py
+msgid "Nearby Devices"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/bluetooth_manager.py
+msgid "Devices"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/bluetooth_manager.py
+msgid "Bluetooth Settings…"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/connection_box.py
+msgid "Loading…"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/connection_box.py
+msgid "Switching…"
+msgstr ""
+
+#. Translators: tile title, split over two lines with \n
+#: cupertinocontrolcenter/widgets/disturb_box.py
+msgid ""
+"Do Not\n"
+"Disturb"
+msgstr ""
+
+#. Translators: tile title, split over two lines with \n
+#: cupertinocontrolcenter/widgets/keyboard_brightness.py
+msgid ""
+"Keyboard\n"
+"Brightness"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/keyboard_brightness.py
+msgid "Keyboard Brightness"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/keyboard_brightness.py
+msgid "Keyboard Settings…"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/media_box.py
+msgid "No Media Playing"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/media_box.py
+msgid "Unknown Artist"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/network_manager.py
+msgid "Network Settings…"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/network_manager.py
+msgid "Personal Hotspot"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/network_manager.py
+msgid "Known Networks"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/network_manager.py
+msgid "Other Networks"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/network_manager.py
+msgid "Other…"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/network_manager.py
+msgid "Connecting…"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/network_manager.py
+msgid "Password"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/network_manager.py
+msgid "Show password"
+msgstr ""
+
+#: cupertinocontrolcenter/widgets/network_manager.py
+msgid "Wrong password. Try again"
+msgstr ""
+
+#. Translators: tile title, split over two lines with \n. A hair space (U+200A)
+#. at
+#. the end of a line can be used to optically center a short first line.
+#: cupertinocontrolcenter/widgets/screen_mirroring.py
+msgid ""
+"Screen\n"
+"Mirroring"
+msgstr ""
+
+#: main.py
+msgid "Control Center"
+msgstr ""
+

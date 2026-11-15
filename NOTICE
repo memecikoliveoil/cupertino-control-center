@@ -1,0 +1,38 @@
+Cupertino Control Center
+Copyright (C) Cupertino Control Center contributors
+
+This program is a fork of comice-control-center by Juan Lozano (libredeb),
+https://github.com/libredeb/comice-control-center, and is distributed under the
+GNU General Public License, version 3 (see LICENSE). It has been substantially
+modified and extended.
+
+Not affiliated with or endorsed by Apple Inc. macOS, AirDrop and AirPlay are
+trademarks of Apple Inc., used here only to describe the look and features.
+
+Icons
+-----
+From comice-control-center (GPL-3.0), unchanged:
+  icons/airplane.png, icons/airplane-d.png, icons/bluetooth.png,
+  icons/bluetooth-d.png, icons/control-display.png, icons/control-sound.png,
+  icons/disturb.png, icons/disturb-d.png, icons/eth.png, icons/eth-d.png,
+  icons/bg.png, icons/ccc.svg, icons/ccc-dark.svg
+
+From comice-control-center (GPL-3.0), modified:
+  icons/kbdbrightness.png, icons/control-display-dark.png,
+  icons/control-sound-dark.png, icons/kbdbrightness-dark.png
+
+Original to this project (GPL-3.0):
+  icons/theme-light.png, icons/theme-dark.png, icons/nightshift.png,
+  icons/nightshift-d.png, icons/lowpower.png, icons/lowpower-d.png,
+  icons/screenshare.png, icons/screenshare-dark.png, icons/presentation.png,
+  icons/presentation-d.png, icons/ccc-xfce4-settings.svg, and the keyboard,
+  mouse, link, AirDrop and monitor/TV glyphs drawn in
+  cupertinocontrolcenter/widgets/round_icon.py
+
+Glyphs drawn in cupertinocontrolcenter/widgets/round_icon.py (vector paths):
+  Google Material Symbols: laptop, headphones, microphone
+    Apache License 2.0, Copyright Google LLC (licenses/Apache-2.0.txt)
+  Microsoft Fluent UI System Icons: phone, speaker
+    MIT License, Copyright (c) 2020 Microsoft Corporation (licenses/MIT-Fluent.txt)
+  Phosphor Icons: gamepad
+    MIT License, Copyright (c) 2023 Phosphor Icons (licenses/MIT-Phosphor.txt)

@@ -1,0 +1,499 @@
+/* =========================================================================
+   CUPERTINO CONTROL CENTER - application.css
+   GTK3 note: in GTK3 a list's CSS node is "list" ("listbox" is the GTK4 name), so rules
+   written as "listbox ..." never apply in GTK3.
+   Sections:
+     1. Window and tiles
+     2. Light / dark colours
+     3. Text and icons
+     4. Main view parts
+     5. Sliders
+     6. Detail views (lists, rows, hover, headers, separators)
+     7. Scrollbars
+     8. Bottom bar (battery capsule and buttons)
+   ========================================================================= */
+
+
+/* =========================================================================
+   1. WINDOW AND TILES
+   ========================================================================= */
+.mainwindow {
+    border-radius: 15px;
+}
+
+.styledwidgetbox {
+    border-radius: 11px;
+    padding: 6px;
+}
+
+button {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+/* Keeps nested tiles from stacking their backgrounds into a darker colour */
+stack .styledwidgetbox {
+    background: transparent;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+/* Keyboard Brightness view: no 6px bottom padding from styledwidgetbox */
+.styledwidgetbox.kbd-view {
+    padding-bottom: 0px;
+}
+
+
+/* =========================================================================
+   2. LIGHT / DARK COLOURS
+   ========================================================================= */
+.light-mode.mainwindow {
+    background: rgba(172, 172, 172, 0.85);
+}
+
+.light-mode .styledwidgetbox {
+    background-color: rgba(228, 228, 228, 0.85);
+}
+.dark-mode .styledwidgetbox {
+    background-color: rgba(70, 70, 70, 0.85);
+}
+
+/* In detail views the window background matches the tiles */
+.light-mode.expand-mode {
+    background: rgba(228, 228, 228, 1);
+    background-color: rgba(228, 228, 228, 1);
+}
+.dark-mode.expand-mode {
+    background: rgba(70, 70, 70, 1);
+    background-color: rgba(70, 70, 70, 1);
+}
+
+.light-mode label {
+    color: #222222;
+}
+.dark-mode label {
+    color: #ffffff;
+}
+
+
+/* =========================================================================
+   3. TEXT AND ICONS
+   ========================================================================= */
+/* All labels: 2px top padding to line up with icons */
+label {
+    padding-top: 2px;
+    margin: 0;
+}
+
+/* Bold titles (Wi-Fi, Bluetooth, Display, Sound...) */
+.general_title {
+    font-weight: 700;
+    font-size: 10pt;
+}
+
+/* Status texts (SSID, Off, artist...) */
+.general_desc {
+    font-weight: 500;   /* medium: grey 8pt text looks too faint at 400 */
+    font-size: 8pt;
+}
+/* Two-line titles of the Keyboard Brightness / Screen Mirroring tiles: medium, like the
+   Music Recognition capsule (Inter at 400 looks thin at this size on Linux). */
+.general_widget_title {
+    font-weight: 500;
+}
+/* Note: these two tiles take their width from the text. Fixing it with min-width would push
+   the content to the left (the button is left-aligned in the tile). */
+
+/* Secondary lines are a lighter tone of the title, as on macOS */
+/* macOS (Sonoma, light): title ~(14,15,20), secondary ~(67,66,73) on a ~200 background,
+   i.e. ~67% black. 0.62 gives the same tone on our lighter background. */
+/* Measured on macOS: secondary lines (network name, "On", artist) */
+.light-mode label.general_desc {
+    color: rgba(0, 0, 0, 0.62);
+}
+/* Dark mode: macOS secondary lines are nearly white, a touch lighter than the title.
+   Same tone as the list headers (mac-category-title-row). */
+.dark-mode label.general_desc {
+    color: rgba(238, 238, 238, 0.9);
+}
+
+/* Icons in tiles: gap to the text and a 1px downward nudge */
+.styledwidgetbox image {
+    margin-right: 6px;
+    margin-top: 1px;
+}
+
+/* The "›" shown on hover must not change the row height */
+.menu_arrow_hint {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+/* =========================================================================
+   4. MAIN VIEW PARTS
+   ========================================================================= */
+/* Connections tile: status text close to the title */
+label.conn-desc {
+    margin-top: -1px;
+}
+
+/* Padding of the Keyboard Brightness / Screen Mirroring buttons */
+.widgetbutton {
+    padding: 0px 7px;
+    margin: 0;
+    border: none;
+    background: none;
+}
+/* On macOS nothing happens when hovering these two tiles: the theme's button hover/press
+   effects are turned off ("button:hover" is more specific in the theme, so it's repeated). */
+button.widgetbutton:hover,
+button.widgetbutton:active,
+button.widgetbutton:checked,
+button.widgetbutton:focus {
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    -gtk-icon-effect: none;
+}
+
+/* Colour of button icons in tiles */
+.light-mode .styledwidgetbox button image {
+    color: #222222;
+}
+.dark-mode .styledwidgetbox button image {
+    color: #ffffff;
+}
+
+/* Round button next to the Display / Sound sliders: its circle is drawn in code; the theme's
+   hover effect and the icon's right margin are turned off */
+button.level-side-button {
+    padding: 0px;
+    margin: 0px;
+    min-width: 0px;
+    min-height: 0px;
+    background: none;
+}
+button.level-side-button image,
+.styledwidgetbox button.level-side-button image {
+    margin: 0px;
+    -gtk-icon-effect: none;
+}
+
+/* Media tile: cover background */
+.light-mode .modern-media-cover {
+    background-color: rgba(0, 0, 0, 0.06);
+}
+.light-mode .modern-media-cover image {
+    color: rgba(0, 0, 0, 0.6);
+}
+.dark-mode .modern-media-cover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.dark-mode .modern-media-cover image {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Media tile play/next buttons, without theme padding */
+button.media-glyph-button.box-glyph {
+    padding: 0px;
+    min-width: 0px;
+    min-height: 0px;
+}
+
+
+/* =========================================================================
+   5. SLIDERS (Sound, Display, Keyboard)
+   ========================================================================= */
+scale {
+    min-width: 250px;
+}
+
+/* Empty track */
+/* Height 22. padding = knob radius + 1 (11 + 1); change together with the -12 of the
+   highlight below */
+scale trough {
+    min-height: 22px;
+    border-radius: 22px;
+    min-width: 250px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.light-mode scale trough {
+    background-color: rgba(172, 172, 172, 0.6);
+}
+.dark-mode scale trough {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Filled part */
+scale highlight {
+    border-radius: 22px;
+    margin-left: -12px;
+    margin-right: -12px;
+}
+.light-mode scale highlight {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.dark-mode scale highlight {
+    background-color: rgba(250, 250, 250, 0.9);
+}
+
+/* Knob */
+scale slider {
+    min-height: 22px;
+    min-width: 22px;
+    border-radius: 100%;
+    background-color: #ffffff;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+.light-mode scale slider {
+    background-color: rgba(255, 255, 255, 1);
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+}
+.dark-mode scale slider {
+    background-color: rgba(238, 238, 238, 1);
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Knob travel */
+.widgetslider {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+/* Icon inside the slider (speaker, sun...) */
+.light-mode .mac-slider-embedded-icon {
+    color: rgba(195, 195, 195, 1);
+}
+.dark-mode .mac-slider-embedded-icon {
+    color: rgba(60, 60, 60, 0.9);
+}
+
+
+/* =========================================================================
+   6. DETAIL VIEWS
+   Row classes:
+     .mac-wifi-row             clickable row (network, device, "... Settings"): hover effect
+     .mac-category-title-row   header only ("Known Networks", "Devices"): no hover
+     .mac-category-toggle-row  expandable header ("Other Networks"): hover, grey text
+     .mac-bottom-settings-row  the "... Settings" row at the bottom: tight spacing
+     .styled-separator-row     row holding a separator
+   ========================================================================= */
+
+/* --- 6a. List and row background: transparent, no border --- */
+list.transparent-listbox,
+.transparent-listbox {
+    background-color: transparent;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0px;
+    margin: 0px;
+}
+.transparent-listbox row,
+.transparent-listbox > row {
+    background-color: transparent;
+    background: transparent;
+    border: none;
+}
+
+/* --- 6b. Hover: rounded grey background --- */
+.light-mode .transparent-listbox row:hover,
+.light-mode row.mac-wifi-row:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 6px;
+}
+.dark-mode .transparent-listbox row:hover,
+.dark-mode row.mac-wifi-row:hover {
+    background-color: rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.09);
+    border-radius: 6px;
+}
+
+/* --- 6c. Headers --- */
+/* Header only: macOS grey, no hover */
+/* Headers ("Known Networks", "Other Networks"...): dark grey as on macOS. The row is
+   insensitive, which makes the theme fade the text, so :disabled gets the same colour. */
+.light-mode row.mac-category-title-row label:not(.mac-secondary-text),
+.light-mode row.mac-category-title-row label:not(.mac-secondary-text):disabled {
+    color: rgba(0, 0, 0, 0.62);
+}
+.dark-mode row.mac-category-title-row label {
+    color: rgba(238, 238, 238, 0.9);
+}
+.light-mode .transparent-listbox row.mac-category-title-row:hover,
+.dark-mode .transparent-listbox row.mac-category-title-row:hover {
+    background-color: transparent;
+    background: transparent;
+    border-radius: 0px;
+}
+
+/* "Other Networks": hover effect, but the text keeps the header grey */
+.light-mode row.mac-category-toggle-row label:not(.mac-secondary-text),
+.light-mode row.mac-category-toggle-row label:not(.mac-secondary-text):disabled {
+    color: rgba(0, 0, 0, 0.62);
+}
+.dark-mode row.mac-category-toggle-row label {
+    color: rgba(238, 238, 238, 0.9);
+}
+
+/* Wi-Fi row with the password field open: stays highlighted without the pointer, so the
+   network name and the field read as one block */
+.light-mode row.mac-row-expanded {
+    background-color: rgba(0, 0, 0, 0.06);
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 6px;
+}
+.dark-mode row.mac-row-expanded {
+    background-color: rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.09);
+    border-radius: 6px;
+}
+
+/* Grey secondary texts ("Power Source", time remaining, "No Apps" in the Battery view) */
+.light-mode label.mac-secondary-text {
+    color: rgba(0, 0, 0, 0.5);
+}
+.dark-mode label.mac-secondary-text {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* --- 6d. Row spacing (theme row padding off) --- */
+list row.styled-separator-row,
+list row.mac-category-title-row,
+list row.mac-bottom-settings-row,
+list row.mac-bottom-settings-row:hover {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    min-height: 0px;
+}
+row.mac-bottom-settings-row box,
+row.mac-bottom-settings-row label {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/* AirDrop: checkmark on the right edge, with 5px of room */
+.transparent-listbox > row.mac-airdrop-row {
+    padding-right: 0px;
+    margin-right: 0px;
+}
+.transparent-listbox > row.mac-airdrop-row image {
+    margin-right: 5px;
+}
+
+/* --- 6e. Separators --- */
+.light-mode separator {
+    min-height: 1px;
+    background-color: rgba(172, 172, 172, 0.6);
+    margin: 3px 0px;
+}
+.dark-mode separator {
+    min-height: 1px;
+    background-color: rgba(255, 255, 255, 0.15);
+    margin: 3px 0px;
+}
+/* Separator above the "... Settings" row. Same as the general one (3px) for now; kept
+   separate so it stays put if you change the general separator. */
+.light-mode separator.tight-bottom,
+.dark-mode separator.tight-bottom {
+    margin-bottom: 3px;
+}
+
+/* --- 6f. Text of flat buttons --- */
+.light-mode button.flat label {
+    color: rgba(0, 0, 0, 0.7);
+}
+.dark-mode button.flat label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* =========================================================================
+   7. SCROLLBARS (hidden)
+   ========================================================================= */
+scrollbar,
+scrollbar button,
+scrollbar slider,
+scrollbar trough {
+    min-width: 0px;
+    min-height: 0px;
+    background: transparent;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+scrolledwindow {
+    border: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================================
+   8. BOTTOM BAR (battery capsule and buttons)
+   ========================================================================= */
+.opt-battery-box {
+    border-radius: 12px;
+    transition: background-color 0.1s ease-in-out;
+}
+.light-mode .opt-battery-box {
+    background-color: rgba(228, 228, 228, 0.85);
+}
+.dark-mode .opt-battery-box {
+    background-color: rgba(70, 70, 70, 0.85);
+}
+
+.opt-curved-btn {
+    border-radius: 12px;
+    min-width: 32px;
+    min-height: 24px;
+    transition: background-color 0.12s ease-in-out;
+}
+.light-mode .opt-curved-btn {
+    background-color: rgba(228, 228, 228, 0.85);
+}
+.dark-mode .opt-curved-btn {
+    background-color: rgba(70, 70, 70, 0.85);
+}
+
+/* Battery drawing in the capsule: same colour as the text (the code reads this colour) */
+.light-mode .opt-battery-glyph {
+    color: #222222;
+}
+.dark-mode .opt-battery-glyph {
+    color: #ffffff;
+}
+
+/* Icons in the small buttons */
+.light-mode .opt-curved-btn image {
+    color: #222222;
+}
+.dark-mode .opt-curved-btn image {
+    color: #ffffff;
+}
+
+/* List headers ("Known Networks", "Other Networks", "Devices", "Output", "Power Modes"...),
+   all styled here: semibold-ish, a bit smaller than body text, with slight letter spacing,
+   as on macOS. */
+label.mac-section-title {
+    font-weight: 700;
+    font-size: 8pt;      /* header size is ~89% of the network name's, as on macOS */
+    letter-spacing: 0.3px;
+}

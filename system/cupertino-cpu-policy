@@ -1,0 +1,43 @@
+#!/bin/sh
+# Cupertino Control Center - Low Power Mode helper (runs as root through pkexec).
+# Accepts only two fixed commands and touches nothing else:
+#   lowpower : governor=powersave, turbo off
+#   normal   : governor=what TLP wants for the current power source (/etc/tlp.conf), turbo on
+set -eu
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+CPU=/sys/devices/system/cpu
+
+case "${1:-}" in
+  lowpower)
+    gov=powersave
+    turbo=1
+    ;;
+  normal)
+    turbo=0
+    key=CPU_SCALING_GOVERNOR_ON_BAT
+    for ps in /sys/class/power_supply/*; do
+      if [ "$(cat "$ps/type" 2>/dev/null)" = "Mains" ] && [ "$(cat "$ps/online" 2>/dev/null)" = "1" ]; then
+        key=CPU_SCALING_GOVERNOR_ON_AC
+      fi
+    done
+    # /etc/tlp.d/*.conf overrides /etc/tlp.conf; the last value found wins
+    gov=$(cat /etc/tlp.conf /etc/tlp.d/*.conf 2>/dev/null \
+          | sed -n "s/^[[:space:]]*$key=[\"']\{0,1\}\([a-z]*\).*/\1/p" | tail -n 1)
+    avail=" $(cat $CPU/cpu0/cpufreq/scaling_available_governors 2>/dev/null) "
+    in_avail() { case "$avail" in *" $1 "*) return 0 ;; *) return 1 ;; esac; }
+    if [ -z "$gov" ] || ! in_avail "$gov"; then
+      if in_avail schedutil; then gov=schedutil; else gov=powersave; fi
+    fi
+    ;;
+  *)
+    echo "usage: $0 lowpower|normal" >&2
+    exit 2
+    ;;
+esac
+
+if [ -e $CPU/intel_pstate/no_turbo ]; then
+  echo "$turbo" > $CPU/intel_pstate/no_turbo
+fi
+for g in $CPU/cpu*/cpufreq/scaling_governor; do
+  echo "$gov" > "$g"
+done

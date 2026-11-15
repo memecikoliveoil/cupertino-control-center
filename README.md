@@ -1,0 +1,152 @@
+# Cupertino Control Center
+
+A macOS Big Sur–style Control Center for the XFCE desktop, written in Python and GTK 3.
+
+<!-- Screenshots: add images under screenshots/ and link them here. -->
+
+It started as a fork of [comice-control-center](https://github.com/libredeb/comice-control-center)
+by Juan Lozano and has since been largely rewritten and extended.
+
+## Features
+
+- **Wi-Fi** and **Bluetooth** lists with connect/disconnect and saved hotspots
+- **AirDrop**-style sharing through Valent (KDE Connect) or LocalSend
+- **Do Not Disturb**, **Keyboard Brightness**, **Screen Mirroring** tiles
+- **Display** brightness slider with a detail view: Dark Mode, Night Shift (gammastep),
+  Presentation Mode (xfce4-power-manager)
+- **Sound** volume slider with mute and output/input device selection
+- **Now Playing** media controls for any MPRIS player (artwork, progress, app badge)
+- Optional bottom bar: **Battery** (with Low Power Mode), **Music Recognition**
+  (SongRec), Settings, Screenshot, Lock, Power
+- Follows the system light/dark color scheme
+- Event-driven updates (PulseAudio, udev, UPower, MPRIS D-Bus signals) rather than polling
+- English and Turkish; other languages can be added without touching the code
+
+Tested on Xubuntu 24.04 (XFCE, X11) on a MacBook Air (2012) with the WhiteSur GTK and
+icon themes. Other hardware should work; tiles for hardware that isn't present are hidden.
+
+## Requirements
+
+Python 3 with PyGObject (GTK 3), pycairo, pydbus and psutil:
+
+```bash
+sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0 python3-pydbus python3-psutil
+```
+
+Command-line tools, by feature:
+
+| Feature | Needs |
+| --- | --- |
+| Wi-Fi | NetworkManager (`nmcli`) |
+| Bluetooth | BlueZ (`bluetoothctl`) |
+| Sound | PulseAudio or PipeWire-Pulse (`pactl`); `pavucontrol` for "Sound Settings…" |
+| Display brightness | `brightnessctl`, `udevadm` |
+| Keyboard brightness | UPower with a keyboard backlight (e.g. `smc::kbd_backlight`) |
+| Now Playing | `playerctl`, `wmctrl`, `xdotool` |
+| Night Shift | `gammastep` (optionally `gammastep-indicator`) |
+| Presentation Mode | `xfce4-power-manager`, `xfconf-query` |
+| Screen Mirroring | `xrandr` |
+| AirDrop | Valent (Flatpak) and/or LocalSend |
+| Music Recognition | [SongRec](https://github.com/marin-m/SongRec) |
+| Low Power Mode | `pkexec`, TLP (optional); see below |
+| Bottom bar buttons | `xfce4-settings-manager`, `xfce4-screenshooter`, `xflock4`, `xfce4-session-logout` |
+
+## Installation
+
+```bash
+git clone https://github.com/memecikoliveoil/cupertino-control-center.git ~/.config/cupertino-control-center
+python3 ~/.config/cupertino-control-center/main.py
+```
+
+To open it from the panel, add a Launcher item that runs the command above. Clicking the
+launcher again closes it, as do Esc and clicking outside the window.
+
+### Low Power Mode helper (optional)
+
+Switching the CPU governor needs root. A small helper accepts only two fixed commands
+(`lowpower`, `normal`), and a polkit rule lets the active local user run it without a password:
+
+```bash
+sudo install -m 755 system/cupertino-cpu-policy /usr/local/libexec/cupertino-cpu-policy
+sudo install -m 644 system/com.github.memecikoliveoil.cupertino-cpu-policy.policy /usr/share/polkit-1/actions/
+```
+
+## Customizing
+
+Values meant to be adjusted (sizes, spacing, delays, thresholds) are named constants near
+the top of each file or class, with a comment saying what they do. For example:
+
+- `main.py`: window position (`WINDOW_RIGHT_OFFSET`, `WINDOW_TOP_GAP`), scrolling
+  speed and direction (`SCROLL_*`)
+- `functions/display_view.py`: button icon alignment (`ICON_NUDGE`)
+- `functions/airdrop.py`: how Valent and LocalSend are started (`BACKEND_COMMANDS`)
+- `widgets/media_box.py`: the music app opened when nothing is playing (`IDLE_APP`,
+  `IDLE_COMMAND`, Lollypop by default)
+- `widgets/keyboard_brightness.py`: the keyboard backlight device (`KBD_DEVICE`, detected
+  automatically)
+- `application.css`: colors, corner radii, fonts
+
+### Audio device names
+
+Give audio devices your own names (and icons) in `settings.json`:
+
+```json
+{
+  "sound_device_names": [
+    {"match": ["beoplay", "portal"], "name": "B&O Beoplay Portal", "type": "headphone"}
+  ]
+}
+```
+
+A device whose system name contains any `match` word is shown as `name`. `type` is optional
+(`headphone`, `earbuds`, `speaker`, `microphone`, `display`, `internal`).
+
+### Dark Mode and theme scripts
+
+Dark Mode switches the GTK, window border and icon themes to their dark or light variants
+(e.g. `WhiteSur-Light` ↔ `WhiteSur-Dark`, `Adwaita` ↔ `Adwaita-dark`). If your themes are
+named differently, set them in `cupertinocontrolcenter/functions/states/settings.json`:
+
+```json
+{
+  "light_gtk_theme": "Greybird", "dark_gtk_theme": "Greybird-dark",
+  "light_wm_theme": "Greybird", "dark_wm_theme": "Greybird-dark",
+  "light_icon_theme": "elementary-xfce", "dark_icon_theme": "elementary-xfce-dark"
+}
+```
+
+If you have your own script that switches themes (and wallpapers) by time of day, put it at
+`~/.local/bin/auto_theme.py` (or change `THEME_SCRIPT` in `functions/display_view.py`). The
+button then becomes **Theme** and cycles through Automatic, Sunrise, Day, Sunset and Night;
+the comment above `THEME_SCRIPT` describes what the script receives and reports.
+
+Settings that can be changed without editing code are in the Settings window
+(`python3 cupertinocontrolcenter/settings_gui.py`).
+
+## Translations
+
+The interface follows the system language. To force one, set `"language"` (e.g. `"en"`,
+`"tr"`) in `cupertinocontrolcenter/functions/states/settings.json`, or start with
+`LANGUAGE=en`.
+
+Translations are plain gettext `.po` files in `po/` and are read directly, with no build step.
+To add a language, copy `po/cupertino-control-center.pot` to `po/<code>.po` (e.g. `po/de.po`)
+and fill in the `msgstr` lines.
+
+After adding or changing `_()` strings in the code (needs `python3-babel` and `gettext`):
+
+```bash
+make update-po
+```
+
+## Credits
+
+- [comice-control-center](https://github.com/libredeb/comice-control-center) by Juan Lozano,
+  the original project
+- Icon sources are listed in [NOTICE](NOTICE)
+
+Not affiliated with Apple Inc.
+
+## License
+
+GNU General Public License v3.0; see [LICENSE](LICENSE).
