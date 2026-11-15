@@ -60,7 +60,8 @@ Turn these on in the Settings window and they appear at the bottom of Control Ce
 
 ## Requirements
 
-Python 3 with PyGObject (GTK 3), pycairo, pydbus and psutil:
+Python 3 (developed and tested with 3.12, the default on Xubuntu 24.04; 3.10 and later should
+work) with PyGObject (GTK 3), pycairo, pydbus and psutil:
 
 ```bash
 sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0 python3-pydbus python3-psutil
