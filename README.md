@@ -66,7 +66,15 @@ Turn these on in the Settings window and they appear at the bottom of Control Ce
   is on as well, Music Recognition moves to a second row.
 
 <p align="center"><img src="screenshots/bottom-bar.gif" alt="Turning on Battery, Music Recognition and the quick buttons in Settings, then using them in Control Center" width="800"></p>
-<p align="center"><img src="screenshots/music.png" alt="Music Recognition with the last recognised songs" width="800"></p>
+
+### More screenshots
+
+<p align="center"><img src="screenshots/dark.png" alt="Control Center in the dark theme" width="800"></p>
+
+### More screenshots
+
+<p align="center"><img src="screenshots/music.png" alt="Control Center with the last recognised songs while music plays" width="800"></p>
+<p align="center"><img src="screenshots/dark.png" alt="Control Center in the dark theme" width="800"></p>
 
 ## Requirements
 
