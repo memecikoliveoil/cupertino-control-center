@@ -71,10 +71,7 @@ Turn these on in the Settings window and they appear at the bottom of Control Ce
 
 <p align="center"><img src="screenshots/dark.png" alt="Control Center in the dark theme" width="800"></p>
 
-### More screenshots
-
 <p align="center"><img src="screenshots/music.png" alt="Control Center with the last recognised songs while music plays" width="800"></p>
-<p align="center"><img src="screenshots/dark.png" alt="Control Center in the dark theme" width="800"></p>
 
 ## Requirements
 
