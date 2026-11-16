@@ -2,7 +2,7 @@
 
 A macOS Big Sur–style Control Center for the XFCE desktop, written in Python and GTK 3.
 
-<p align="center"><img src="screenshots/overview.gif" alt="Opening Control Center, then the Sound, Bluetooth, AirDrop and Keyboard Brightness menus" width="390"></p>
+<p align="center"><img src="screenshots/light.png" alt="Control Center open over a macOS-style desktop" width="800"></p>
 <p align="center"><sub>Shown with the Turkish interface; it follows the system language.</sub></p>
 
 It started as a fork of [comice-control-center](https://github.com/libredeb/comice-control-center)
@@ -28,6 +28,8 @@ icon themes. Other hardware should work; tiles for hardware that isn't present a
 
 ## A closer look
 
+<p align="center"><img src="screenshots/overview.gif" alt="Opening Control Center, then the Sound, Bluetooth, AirDrop and Keyboard Brightness menus" width="390"></p>
+
 ### Display
 
 Click **Display** for Dark Mode (or your own theme script), Night Shift and Presentation.
@@ -36,6 +38,13 @@ The brightness slider is on the main view.
 <p align="center"><img src="screenshots/display.gif" alt="Turning Night Shift off and on, then dragging the brightness slider" width="390"></p>
 <p align="center"><sub>Shown with the Turkish interface. Screen recorders capture the picture before the backlight
 and colour temperature are applied, so brightness and Night Shift are recreated in this GIF.</sub></p>
+
+With a theme script (see [Dark Mode and theme scripts](#dark-mode-and-theme-scripts)), the first
+button becomes **Theme** and steps through Automatic, Sunrise, Day, Sunset and Night. Control
+Center follows the light or dark theme it sets.
+
+<p align="center"><img src="screenshots/themes.gif" alt="Stepping through the theme modes while the wallpaper, windows and Control Center change between light and dark" width="800"></p>
+<p align="center"><img src="screenshots/light-dark.png" alt="Control Center in the light and dark themes" width="780"></p>
 
 ### Now Playing
 
@@ -57,6 +66,7 @@ Turn these on in the Settings window and they appear at the bottom of Control Ce
   is on as well, Music Recognition moves to a second row.
 
 <p align="center"><img src="screenshots/bottom-bar.gif" alt="Turning on Battery, Music Recognition and the quick buttons in Settings, then using them in Control Center" width="800"></p>
+<p align="center"><img src="screenshots/music.png" alt="Music Recognition with the last recognised songs" width="800"></p>
 
 ## Requirements
 
