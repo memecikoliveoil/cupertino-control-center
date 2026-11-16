@@ -130,7 +130,7 @@ msgid "Night Shift"
 msgstr "Night Shift"
 
 #: cupertinocontrolcenter/functions/display_view.py
-msgid "Presentation Mode"
+msgid "Presentation"
 msgstr "Sunum Kipi"
 
 #: cupertinocontrolcenter/functions/display_view.py cupertinocontrolcenter/functions/sm_view.py

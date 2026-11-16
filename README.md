@@ -14,7 +14,7 @@ by Juan Lozano and has since been largely rewritten and extended.
 - **AirDrop**-style sharing through Valent (KDE Connect) or LocalSend
 - **Do Not Disturb**, **Keyboard Brightness**, **Screen Mirroring** tiles
 - **Display** brightness slider with a detail view: Dark Mode, Night Shift (gammastep),
-  Presentation Mode (xfce4-power-manager)
+  Presentation (xfce4-power-manager)
 - **Sound** volume slider with mute and output/input device selection
 - **Now Playing** media controls for any MPRIS player (artwork, progress, app badge)
 - Optional bottom bar: **Battery** (with Low Power Mode), **Music Recognition**
@@ -30,7 +30,7 @@ icon themes. Other hardware should work; tiles for hardware that isn't present a
 
 ### Display
 
-Click **Display** for Dark Mode (or your own theme script), Night Shift and Presentation Mode.
+Click **Display** for Dark Mode (or your own theme script), Night Shift and Presentation.
 The brightness slider is on the main view.
 
 <p align="center"><img src="screenshots/display.gif" alt="Turning Night Shift off and on, then dragging the brightness slider" width="390"></p>
@@ -78,7 +78,7 @@ Command-line tools, by feature:
 | Keyboard brightness | UPower with a keyboard backlight (e.g. `smc::kbd_backlight`) |
 | Now Playing | `playerctl`, `wmctrl`, `xdotool` |
 | Night Shift | `gammastep` (optionally `gammastep-indicator`) |
-| Presentation Mode | `xfce4-power-manager`, `xfconf-query` |
+| Presentation | `xfce4-power-manager`, `xfconf-query` |
 | Screen Mirroring | `xrandr` |
 | AirDrop | Valent (Flatpak) and/or LocalSend |
 | Music Recognition | [SongRec](https://github.com/marin-m/SongRec) |

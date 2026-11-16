@@ -174,7 +174,7 @@ class DisplayView(Gtk.Box):
         self.pm_icon.set_halign(Gtk.Align.CENTER)
 
         pm_lbl_title = Gtk.Label()
-        pm_lbl_title.set_markup(_markup(_("Presentation Mode"), "weight='bold' size='small'"))
+        pm_lbl_title.set_markup(_markup(_("Presentation"), "weight='bold' size='small'"))
         self.pm_lbl_status = Gtk.Label()
         self.pm_lbl_status.get_style_context().add_class("general_desc")
         self.pm_lbl_status.set_margin_start(1)
