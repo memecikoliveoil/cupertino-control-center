@@ -10,6 +10,7 @@ from cupertinocontrolcenter.functions.battery_box import BatteryBox, get_battery
 from cupertinocontrolcenter.functions.music_recognition import MusicCapsule, MusicView
 from cupertinocontrolcenter.paths import STATE_DIR
 from cupertinocontrolcenter.i18n import _
+from cupertinocontrolcenter.spawn import spawn
 
 # Bottom bar settings, written by settings_gui.py (keep the defaults in sync with it)
 SETTINGS_PATH = os.path.join(STATE_DIR, "settings.json")
@@ -339,8 +340,8 @@ class OptionalBar(Gtk.Box):
             return False
         try:
             # In its own session, so it survives the Control Center closing
-            subprocess.Popen(cmd, start_new_session=True,
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            spawn(cmd, start_new_session=True,
+                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         except Exception as e:
             print(f"Could not start {cmd[0]}: {e}")
         app = Gtk.Application.get_default()

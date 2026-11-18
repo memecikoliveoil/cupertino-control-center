@@ -11,6 +11,7 @@ from gi.repository import Gtk, GLib, Gdk, Gio, Pango, GdkPixbuf
 from cupertinocontrolcenter.widgets.round_icon import RoundIcon
 from cupertinocontrolcenter.paths import STATE_DIR
 from cupertinocontrolcenter.i18n import _
+from cupertinocontrolcenter.spawn import spawn
 
 class SoundView(Gtk.Box):
     def __init__(self):
@@ -143,7 +144,7 @@ class SoundView(Gtk.Box):
         p_box.pack_start(p_lbl, True, True, 0)
         p_eb.add(p_box); p_item.add(p_eb); pref_row.add(p_item)
         p_eb.connect("button-press-event", lambda w, e: [
-            subprocess.Popen(["pavucontrol"]),
+            spawn(["pavucontrol"]),
             self.app.window.hide() if (self.app and hasattr(self.app, 'window') and self.app.window) else None
         ] if e.button == 1 else False)
         
@@ -176,8 +177,8 @@ class SoundView(Gtk.Box):
                         return
         except: pass
         # Fallback if the main view's tile isn't there
-        subprocess.Popen(["pactl", "set-sink-volume", "@DEFAULT_SINK@", f"{val}%"],
-                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        spawn(["pactl", "set-sink-volume", "@DEFAULT_SINK@", f"{val}%"],
+              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     def _on_embedded_icon_pressed(self, widget, event):
         if event.button == 1:
@@ -200,8 +201,8 @@ class SoundView(Gtk.Box):
         # Hit area: the icon plus 2 px on the right (tune the number to taste)
         if not r or not (0 <= r[0] < a.width + 2 and 0 <= r[1] < a.height):
             return False
-        subprocess.Popen(["pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle"],
-                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        spawn(["pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle"],
+              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         GLib.timeout_add(80, self._after_mute_toggle)
         return True
 
@@ -506,7 +507,7 @@ class SoundView(Gtk.Box):
 
     def _on_open_pavucontrol(self, widget, event):
         if event.button == 1:
-            subprocess.Popen(["pavucontrol"])
+            spawn(["pavucontrol"])
             app = Gtk.Application.get_default()
             if app and hasattr(app, 'window') and app.window: app.window.hide()
             return True

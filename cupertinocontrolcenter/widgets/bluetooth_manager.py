@@ -9,6 +9,7 @@ from gi.repository import Gtk, GLib, Gdk, Pango
 from cupertinocontrolcenter.widgets.round_icon import RoundIcon
 from cupertinocontrolcenter.paths import STATE_DIR
 from cupertinocontrolcenter.i18n import _
+from cupertinocontrolcenter.spawn import spawn
 
 # "Devices": paired devices (a fixed list, as in the macOS Control Center).
 # "Nearby Devices": new, unpaired devices. Expands and collapses like "Other Networks" in
@@ -414,7 +415,7 @@ class BluetoothManager(Gtk.Box):
                         if "DISPLAY" not in c_env: 
                             c_env["DISPLAY"] = ":0.0"
                         try:
-                            subprocess.Popen(["blueman-manager"], env=c_env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                            spawn(["blueman-manager"], env=c_env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                             if self.app and hasattr(self.app, 'window') and self.app.window: 
                                 self.app.window.hide()
                         except: 

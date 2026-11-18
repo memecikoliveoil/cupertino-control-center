@@ -8,6 +8,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gdk, Pango
 from cupertinocontrolcenter.widgets.round_icon import RoundIcon
 from cupertinocontrolcenter.i18n import _
+from cupertinocontrolcenter.spawn import spawn
 
 class SMView(Gtk.Box):
     def __init__(self, app_instance=None):
@@ -174,7 +175,7 @@ class SMView(Gtk.Box):
         lbl = Gtk.Label(label=_("Display Settings…"), xalign=0)
         lbl.set_margin_start(0); lbl.set_margin_top(4); lbl.set_margin_bottom(4)
         eb.add(lbl)
-        eb.connect("button-press-event", lambda w, e: subprocess.Popen(["xfce4-display-settings"]) if e.button == 1 else False)
+        eb.connect("button-press-event", lambda w, e: spawn(["xfce4-display-settings"]) if e.button == 1 else False)
         row_shell.add(eb)
         self.display_list_box.add(row_shell)
 

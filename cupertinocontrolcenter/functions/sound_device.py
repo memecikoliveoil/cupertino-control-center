@@ -1,4 +1,5 @@
 import subprocess
+from cupertinocontrolcenter.spawn import spawn
 
 class SoundInformation:
     """Backend for system volume control."""
@@ -33,11 +34,11 @@ class SoundInformation:
         """Sets the volume. Moving the slider while muted also unmutes, as on macOS."""
         try:
             if getattr(self, "muted", False) and percent > 0:
-                subprocess.Popen(["pactl", "set-sink-mute", "@DEFAULT_SINK@", "0"],
-                                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                spawn(["pactl", "set-sink-mute", "@DEFAULT_SINK@", "0"],
+                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 self.muted = False
             # Not waiting for pactl keeps the slider smooth while dragging
-            subprocess.Popen(
+            spawn(
                 ["pactl", "set-sink-volume", "@DEFAULT_SINK@", f"{percent}%"],
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
             )

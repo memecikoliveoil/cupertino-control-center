@@ -9,6 +9,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gdk, Pango, GdkPixbuf
 from cupertinocontrolcenter.i18n import _
 from cupertinocontrolcenter.functions import dark_mode
+from cupertinocontrolcenter.spawn import spawn
 
 # First button. By default it is a Dark Mode switch (see dark_mode.py).
 # Optionally it can drive your own theme script instead: if THEME_SCRIPT exists, the button
@@ -212,7 +213,7 @@ class DisplayView(Gtk.Box):
         p_lbl = Gtk.Label(label=_("Display Settings…"), xalign=0)
         p_lbl.set_margin_start(0); p_lbl.set_margin_top(4); p_lbl.set_margin_bottom(4)
         p_eb.add(p_lbl); p_item.add(p_eb); pref_row.add(p_item)
-        p_eb.connect("button-press-event", lambda w, e: subprocess.Popen([self.DISPLAY_SETTINGS_CMD]) if e.button == 1 else False)
+        p_eb.connect("button-press-event", lambda w, e: spawn([self.DISPLAY_SETTINGS_CMD]) if e.button == 1 else False)
 
         self.pack_start(pref_row, False, False, 0)
 
@@ -430,14 +431,16 @@ class DisplayView(Gtk.Box):
 
         try:
             proc = subprocess.Popen(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            # Re-read the state when the script exits
-            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, proc.pid, self._on_theme_script_done)
+            # Re-read the state when the script exits. proc is handed over so it stays alive
+            # until then (letting go of a running process makes Python warn)
+            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, proc.pid, self._on_theme_script_done, proc)
         except Exception as e:
             print(f"Could not start {THEME_SCRIPT}: {e}")
             self._theme_ui_mode = None
         return False
 
-    def _on_theme_script_done(self, pid, status):
+    def _on_theme_script_done(self, pid, status, proc):
+        proc.returncode = status          # GLib has already collected it; Python mustn't wait again
         if self._theme_timer is None:     # no new click in the meantime
             self._theme_ui_mode = None
             self.refresh_states()
@@ -545,8 +548,8 @@ class DisplayView(Gtk.Box):
             if not self._gs_running():
                 # Not running: start the indicator if installed, otherwise gammastep itself
                 cmd = ["gammastep-indicator"] if shutil.which("gammastep-indicator") else ["gammastep"]
-                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                                 start_new_session=True)
+                spawn(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                      start_new_session=True)
                 new_state = True
             else:
                 subprocess.run(["pkill", "-USR1", "-x", "gammastep"],

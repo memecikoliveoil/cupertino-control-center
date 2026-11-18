@@ -13,6 +13,8 @@ from urllib.parse import urlparse, unquote
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gdk, GdkPixbuf, Pango, Gio
 from cupertinocontrolcenter.i18n import _
+from cupertinocontrolcenter.spawn import spawn
+from cupertinocontrolcenter.appinfo import DesktopAppInfo
 
 try:
     from pydbus import SessionBus
@@ -34,13 +36,13 @@ IDLE_ICONS = ["multimedia-audio-player", "audio-x-generic"]   # the theme's musi
 def launch_idle_player():
     """Starts the music app (by its .desktop file, so distro and Flatpak installs both work)."""
     try:
-        info = Gio.DesktopAppInfo.new(IDLE_APP)
+        info = DesktopAppInfo.new(IDLE_APP)
         if info is not None and info.launch([], None):
             return True
     except Exception:
         pass
     try:
-        subprocess.Popen(IDLE_COMMAND, stdout=DEVNULL, stderr=DEVNULL, start_new_session=True)
+        spawn(IDLE_COMMAND, stdout=DEVNULL, stderr=DEVNULL, start_new_session=True)
         return True
     except Exception as e:
         print(f"Could not start the music app: {e}")
@@ -194,7 +196,7 @@ def _app_gicon(app_id):
     if not app_id:
         return None
     try:
-        info = Gio.DesktopAppInfo.new(app_id + ".desktop")
+        info = DesktopAppInfo.new(app_id + ".desktop")
         return info.get_icon() if info is not None else None
     except Exception:
         return None
@@ -1408,7 +1410,7 @@ class MediaControlBox(Gtk.Box, _WindowTools):
 
             if target is None and is_shortwave_player(mpris):
                 # No window at all (minimized to the tray): launch the app
-                subprocess.Popen(["flatpak", "run", "de.haeckerfelix.Shortwave"], stdout=DEVNULL, stderr=DEVNULL)
+                spawn(["flatpak", "run", "de.haeckerfelix.Shortwave"], stdout=DEVNULL, stderr=DEVNULL)
             elif target is None:
                 print(f"[MediaControlBox] no window found for {mpris}")
         except Exception as e:

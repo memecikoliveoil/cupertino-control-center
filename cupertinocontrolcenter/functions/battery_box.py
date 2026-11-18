@@ -10,6 +10,8 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gdk, Gio, GdkPixbuf, Pango
 from cupertinocontrolcenter.paths import STATE_DIR
 from cupertinocontrolcenter.i18n import _
+from cupertinocontrolcenter.spawn import spawn
+from cupertinocontrolcenter.appinfo import DesktopAppInfo
 
 os.makedirs(STATE_DIR, exist_ok=True)
 LOW_POWER_FILE = os.path.join(STATE_DIR, "low_power_mode")   # Low Power Mode state + settings to restore
@@ -304,7 +306,7 @@ def _desktop_index():
         return _DESKTOP_INDEX
     idx = {}
     try:
-        infos = [i for i in Gio.AppInfo.get_all() if isinstance(i, Gio.DesktopAppInfo)]
+        infos = [i for i in Gio.AppInfo.get_all() if isinstance(i, DesktopAppInfo)]
     except Exception:
         infos = []
     infos.sort(key=lambda i: not i.should_show())   # apps shown in menus first
@@ -749,8 +751,8 @@ class BatteryBox(Gtk.Box):
 
     def _launch(self, cmd):
         try:
-            subprocess.Popen([cmd], start_new_session=True,
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            spawn([cmd], start_new_session=True,
+                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         except Exception as e:
             print(f"Could not start {cmd}: {e}")
         if self.app and hasattr(self.app, "close_cc"):
@@ -798,10 +800,10 @@ class BatteryBox(Gtk.Box):
                     apply_cpu_policy(_load_lp()["on"], False)
                     wifi_on = getattr(airplane, "wifi_was_enabled", True)
                     bt_on = getattr(airplane, "bluetooth_was_enabled", True)
-                    subprocess.Popen(["nmcli", "radio", "wifi", "on" if wifi_on else "off"],
-                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                    subprocess.Popen(["rfkill", "unblock" if bt_on else "block", "bluetooth"],
-                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    spawn(["nmcli", "radio", "wifi", "on" if wifi_on else "off"],
+                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    spawn(["rfkill", "unblock" if bt_on else "block", "bluetooth"],
+                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             except Exception as hardware_ex:
                 print(f"Airplane Mode error: {hardware_ex}")
             # Read the real state, so the checkmark is right even if a command failed

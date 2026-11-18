@@ -8,6 +8,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gio, Gdk, GdkPixbuf
 from cupertinocontrolcenter.functions.sound_device import SoundInformation
 from cupertinocontrolcenter.i18n import _
+from cupertinocontrolcenter.spawn import spawn
 
 # ─────────────────────────────────────────────────────────────
 # Round button next to the slider (same as in display_level.py)
@@ -315,8 +316,8 @@ class SoundLevelBox(Gtk.Box):
         # glyph (tune the number to taste)
         if not r or not (0 <= r[0] < a.width - 4 and 0 <= r[1] < a.height):
             return False
-        subprocess.Popen(["pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle"],
-                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        spawn(["pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle"],
+              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         GLib.timeout_add(80, self._after_mute_toggle)
         return True
 

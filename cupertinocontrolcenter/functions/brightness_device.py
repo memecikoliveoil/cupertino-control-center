@@ -1,6 +1,7 @@
 import subprocess
 import math
 import os
+from cupertinocontrolcenter.spawn import spawn
 
 class BrightnessInformation:
     """Backend for reading/setting brightness via brightnessctl."""
@@ -32,8 +33,8 @@ class BrightnessInformation:
             m = max(1, self.max_brightness)
             raw = 0 if percent <= 0 else max(1, int(round(percent * m / 100)))
             self.last_raw = raw     # level written by the slider, compared on the next read
-            subprocess.Popen(["brightnessctl", "-q", "set", str(raw)],
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            spawn(["brightnessctl", "-q", "set", str(raw)],
+                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             self.percent = percent
         except Exception as e:
             print(f"Failed to set brightness: {e}")

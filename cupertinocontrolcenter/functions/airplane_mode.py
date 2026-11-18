@@ -1,6 +1,7 @@
 import subprocess
 import threading
 import glob
+from cupertinocontrolcenter.spawn import spawn
 
 class AirPlaneInformation:
     def __init__(self):
@@ -39,8 +40,8 @@ class AirPlaneInformation:
                                 break
 
                 # Airplane Mode on
-                subprocess.Popen(["rfkill", "block", "all"], stdout=subprocess.DEVNULL)
-                subprocess.Popen(["tlp", "bat"], stdout=subprocess.DEVNULL)
+                spawn(["rfkill", "block", "all"], stdout=subprocess.DEVNULL)
+                spawn(["tlp", "bat"], stdout=subprocess.DEVNULL)
                 
                 # Turbo off
                 try:
@@ -71,8 +72,8 @@ class AirPlaneInformation:
                         f.write("0")
                 except: pass
                 
-                subprocess.Popen(["rfkill", "unblock", "all"], stdout=subprocess.DEVNULL)
-                subprocess.Popen(["tlp", "start"], stdout=subprocess.DEVNULL)
+                spawn(["rfkill", "unblock", "all"], stdout=subprocess.DEVNULL)
+                spawn(["tlp", "start"], stdout=subprocess.DEVNULL)
                 
                 # Restore the CPU governor
                 for gov_path in glob.glob("/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"):
@@ -83,9 +84,9 @@ class AirPlaneInformation:
                 
                 # Restore Wi-Fi and Bluetooth as they were
                 if not self.wifi_was_enabled:
-                    subprocess.Popen(["nmcli", "radio", "wifi", "off"], stdout=subprocess.DEVNULL)
+                    spawn(["nmcli", "radio", "wifi", "off"], stdout=subprocess.DEVNULL)
                 if not self.bluetooth_was_enabled:
-                    subprocess.Popen(["rfkill", "block", "bluetooth"], stdout=subprocess.DEVNULL)
+                    spawn(["rfkill", "block", "bluetooth"], stdout=subprocess.DEVNULL)
                     
         except Exception as e:
             print(f"Airplane Mode error: {e}")

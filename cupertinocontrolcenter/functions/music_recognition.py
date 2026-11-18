@@ -30,6 +30,7 @@ if __name__ == "__main__":   # worker started as a script: make the package impo
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from cupertinocontrolcenter.paths import STATE_DIR, CACHE_DIR
 from cupertinocontrolcenter.i18n import _, ngettext
+from cupertinocontrolcenter.spawn import spawn
 
 SONGREC_FLATPAK = "re.fossplant.songrec"
 LISTEN_TIMEOUT = 25          # s; "not found" after this (one request records ~12 s of audio)
@@ -98,9 +99,9 @@ def start_listening():
     if is_listening():
         return
     try:
-        subprocess.Popen([sys.executable, os.path.abspath(__file__), "--listen"],
-                         start_new_session=True,
-                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        spawn([sys.executable, os.path.abspath(__file__), "--listen"],
+              start_new_session=True,
+              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception as e:
         print(f"Could not start Music Recognition: {e}")
 
@@ -118,8 +119,8 @@ def stop_listening():
 
 def open_url(url):
     if url:
-        subprocess.Popen(["xdg-open", url], start_new_session=True,
-                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        spawn(["xdg-open", url], start_new_session=True,
+              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def _ytm_pwa_command():
@@ -152,8 +153,8 @@ def open_in_youtube_music(query):
         # Chromium option that opens a web app at a given URL (used by its shortcut menu)
         cmd = cmd + [f"--app-launch-url-for-shortcuts-menu-item={url}"]
         try:
-            subprocess.Popen(cmd, start_new_session=True,
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            spawn(cmd, start_new_session=True,
+                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             return
         except Exception:
             pass
