@@ -23,8 +23,8 @@ by Juan Lozano and has since been largely rewritten and extended.
 - Event-driven updates (PulseAudio, udev, UPower, MPRIS D-Bus signals) rather than polling
 - English and Turkish; other languages can be added without touching the code
 
-Tested on Xubuntu 24.04 (XFCE, X11) on a MacBook Air (2012) with the WhiteSur GTK and
-icon themes. Other hardware should work; tiles for hardware that isn't present are hidden.
+Tested on Xubuntu 24.04 and 26.04 (XFCE, X11) on a MacBook Air (2012) with the WhiteSur GTK
+and icon themes. Other hardware should work; tiles for hardware that isn't present are hidden.
 
 ## A closer look
 
@@ -75,7 +75,7 @@ Turn these on in the Settings window and they appear at the bottom of Control Ce
 
 ## Requirements
 
-Python 3 (developed and tested with 3.12, the default on Xubuntu 24.04; 3.10 and later should
+Python 3 (tested with 3.12 on Xubuntu 24.04 and 3.14 on Xubuntu 26.04; 3.10 and later should
 work) with PyGObject (GTK 3), pycairo, pydbus and psutil:
 
 ```bash
